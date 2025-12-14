@@ -1,286 +1,124 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>ScreenerPro • AI Hiring & Candidate Screening</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8" />
+<title>ScreenerPro • AI Hiring Platform</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <!-- Google Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-  <style>
-    :root {
-      --primary: #2563eb;
-      --secondary: #6366f1;
-      --accent: #22c55e;
-      --bg: #f8fafc;
-      --dark: #0f172a;
-      --muted: #64748b;
-      --card: #ffffff;
-      --border: #e5e7eb;
-    }
+<style>
+:root {
+  --primary:#2563eb;
+  --secondary:#6366f1;
+  --accent:#22c55e;
+  --bg:#f8fafc;
+  --dark:#0f172a;
+  --muted:#64748b;
+  --card:#ffffff;
+  --border:#e5e7eb;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:Inter,sans-serif;
+  background:var(--bg);
+  color:var(--dark);
+}
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+/* HERO */
+.hero{
+  background:linear-gradient(135deg,var(--primary),var(--secondary));
+  color:white;
+  text-align:center;
+  padding:90px 20px 110px;
+}
+.hero h1{
+  font-size:3.2rem;
+  font-weight:800;
+  margin-bottom:16px;
+}
+.hero p{
+  max-width:720px;
+  margin:auto;
+  font-size:1.15rem;
+  margin-bottom:32px;
+}
+.cta{
+  background:white;
+  color:var(--primary);
+  padding:14px 30px;
+  border-radius:999px;
+  font-weight:600;
+  text-decoration:none;
+  display:inline-block;
+}
 
-    body {
-      font-family: Inter, sans-serif;
-      background: var(--bg);
-      color: var(--dark);
-      line-height: 1.6;
-    }
-
-    /* ===== HEADER ===== */
-    header {
-      background: linear-gradient(135deg, var(--primary), var(--secondary));
-      color: white;
-      padding: 80px 20px 100px;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-
-    header h1 {
-      font-size: 3.2rem;
-      font-weight: 800;
-      margin-bottom: 16px;
-    }
-
-    header p {
-      font-size: 1.15rem;
-      max-width: 700px;
-      margin: 0 auto 32px;
-      opacity: 0.95;
-    }
-
-    .cta-btn {
-      display: inline-block;
-      padding: 14px 28px;
-      background: white;
-      color: var(--primary);
-      border-radius: 999px;
-      font-weight: 600;
-      text-decoration: none;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-    }
-
-    .cta-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 14px 30px rgba(0,0,0,0.2);
-    }
-
-    /* ===== SECTIONS ===== */
-    section {
-      padding: 80px 20px;
-      max-width: 1200px;
-      margin: auto;
-    }
-
-    .section-title {
-      text-align: center;
-      margin-bottom: 48px;
-    }
-
-    .section-title h2 {
-      font-size: 2.2rem;
-      font-weight: 700;
-      margin-bottom: 12px;
-    }
-
-    .section-title p {
-      color: var(--muted);
-      max-width: 600px;
-      margin: auto;
-    }
-
-    /* ===== FEATURES ===== */
-    .features {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 24px;
-    }
-
-    .feature-card {
-      background: var(--card);
-      border-radius: 20px;
-      padding: 28px;
-      border: 1px solid var(--border);
-      transition: transform 0.25s ease, box-shadow 0.25s ease;
-    }
-
-    .feature-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 20px 40px rgba(15,23,42,0.08);
-    }
-
-    .feature-icon {
-      font-size: 32px;
-      margin-bottom: 12px;
-    }
-
-    .feature-card h3 {
-      font-size: 1.2rem;
-      margin-bottom: 8px;
-    }
-
-    .feature-card p {
-      color: var(--muted);
-      font-size: 0.95rem;
-    }
-
-    /* ===== HOW IT WORKS ===== */
-    .steps {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 24px;
-    }
-
-    .step {
-      background: linear-gradient(180deg, #ffffff, #f9fafb);
-      border-radius: 20px;
-      padding: 28px;
-      border: 1px solid var(--border);
-    }
-
-    .step span {
-      display: inline-block;
-      background: var(--primary);
-      color: white;
-      font-weight: 600;
-      border-radius: 999px;
-      padding: 6px 14px;
-      font-size: 0.8rem;
-      margin-bottom: 12px;
-    }
-
-    /* ===== CTA ===== */
-    .final-cta {
-      background: linear-gradient(135deg, #0f172a, #1e293b);
-      color: white;
-      text-align: center;
-      border-radius: 32px;
-      padding: 80px 20px;
-    }
-
-    .final-cta h2 {
-      font-size: 2.4rem;
-      margin-bottom: 16px;
-    }
-
-    .final-cta p {
-      color: #cbd5f5;
-      margin-bottom: 28px;
-    }
-
-    .final-cta a {
-      background: var(--accent);
-      color: #022c22;
-    }
-
-    /* ===== FOOTER ===== */
-    footer {
-      padding: 32px 20px;
-      text-align: center;
-      color: var(--muted);
-      font-size: 0.9rem;
-    }
-  </style>
+/* FEATURES */
+section{
+  max-width:1200px;
+  margin:auto;
+  padding:80px 20px;
+}
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:24px;
+}
+.card{
+  background:var(--card);
+  border-radius:20px;
+  padding:28px;
+  border:1px solid var(--border);
+}
+footer{
+  text-align:center;
+  padding:32px;
+  color:var(--muted);
+}
+</style>
 </head>
 
 <body>
 
-  <!-- HERO -->
-  <header>
-    <h1>ScreenerPro</h1>
-    <p>
-      AI-powered candidate screening & hiring automation platform.
-      Screen smarter, hire faster, and make better hiring decisions.
-    </p>
-    <a href="https://candidate-screeneerpro.streamlit.app" class="cta-btn">
-      Launch App →
-    </a>
-  </header>
+<div class="hero">
+  <h1>ScreenerPro</h1>
+  <p>AI-powered candidate screening & hiring automation platform.</p>
 
-  <!-- FEATURES -->
-  <section>
-    <div class="section-title">
-      <h2>Why ScreenerPro?</h2>
-      <p>Everything you need to modernize your hiring workflow — powered by AI.</p>
+  <!-- SAFE FOR STREAMLIT -->
+  <a
+    href="https://candidate-screeneerpro.streamlit.app"
+    target="_blank"
+    rel="noopener noreferrer"
+    class="cta"
+  >
+    Launch App →
+  </a>
+</div>
+
+<section>
+  <div class="grid">
+    <div class="card">
+      <h3>🤖 AI Resume Screening</h3>
+      <p>Rank candidates instantly with intelligent scoring.</p>
     </div>
-
-    <div class="features">
-      <div class="feature-card">
-        <div class="feature-icon">🤖</div>
-        <h3>AI Resume Screening</h3>
-        <p>Automatically evaluate candidates using intelligent scoring and insights.</p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">📄</div>
-        <h3>Smart JD Management</h3>
-        <p>Create, edit, and optimize job descriptions with AI assistance.</p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">📊</div>
-        <h3>Hiring Analytics</h3>
-        <p>Track hiring performance, candidate quality, and pipeline health.</p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">🔐</div>
-        <h3>Secure & Scalable</h3>
-        <p>Built on Firebase with secure authentication and cloud scalability.</p>
-      </div>
+    <div class="card">
+      <h3>📄 Smart JD Management</h3>
+      <p>Create and optimize job descriptions using AI.</p>
     </div>
-  </section>
-
-  <!-- HOW IT WORKS -->
-  <section>
-    <div class="section-title">
-      <h2>How It Works</h2>
-      <p>Simple, fast, and designed for recruiters & founders.</p>
+    <div class="card">
+      <h3>📊 Hiring Analytics</h3>
+      <p>Track pipeline health and hiring performance.</p>
     </div>
-
-    <div class="steps">
-      <div class="step">
-        <span>Step 1</span>
-        <h3>Create a Job</h3>
-        <p>Generate or upload a job description using AI.</p>
-      </div>
-
-      <div class="step">
-        <span>Step 2</span>
-        <h3>Upload Candidates</h3>
-        <p>Add resumes and candidate profiles in bulk.</p>
-      </div>
-
-      <div class="step">
-        <span>Step 3</span>
-        <h3>Screen & Decide</h3>
-        <p>Let ScreenerPro rank candidates and support hiring decisions.</p>
-      </div>
+    <div class="card">
+      <h3>🔐 Secure & Scalable</h3>
+      <p>Built on Firebase with enterprise-grade security.</p>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- FINAL CTA -->
-  <section class="final-cta">
-    <h2>Ready to Hire Smarter?</h2>
-    <p>Join the future of AI-driven recruitment today.</p>
-    <a href="https://candidate-screeneerpro.streamlit.app" class="cta-btn">
-      Get Started Free
-    </a>
-  </section>
-
-  <!-- FOOTER -->
-  <footer>
-    © 2025 ScreenerPro • Built with ❤️ for modern hiring
-  </footer>
+<footer>
+  © 2025 ScreenerPro
+</footer>
 
 </body>
 </html>
-

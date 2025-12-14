@@ -1,4 +1,3 @@
-
 import streamlit as st
 import os
 
@@ -12,29 +11,33 @@ st.set_page_config(
 )
 
 # --------------------------------------------------
-# Hide Streamlit Default UI
+# Hide Streamlit UI
 # --------------------------------------------------
 st.markdown("""
 <style>
 #MainMenu {visibility: hidden;}
 footer {visibility: hidden;}
 header {visibility: hidden;}
+iframe {
+    border: none;
+}
 </style>
 """, unsafe_allow_html=True)
 
 # --------------------------------------------------
-# Load main.html
+# Load HTML safely
 # --------------------------------------------------
 HTML_FILE = "main.html"
 
 if not os.path.exists(HTML_FILE):
-    st.error("❌ main.html not found. Please add it to the project root.")
+    st.error("❌ main.html not found in project root.")
 else:
     with open(HTML_FILE, "r", encoding="utf-8") as f:
-        html_content = f.read()
+        html = f.read()
 
     st.components.v1.html(
-        html_content,
-        height=2200,
+        html,
+        height=2300,
         scrolling=True
     )
+

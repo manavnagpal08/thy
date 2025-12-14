@@ -6,46 +6,84 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
 <style>
 /* 1. VARIABLES & RESET */
 :root {
     --primary: #2563eb; /* Blue 600 */
     --secondary: #6366f1; /* Indigo 500 */
-    --accent: #22c55e; /* Green 500 */
-    --bg: #f3f4f6; /* Light Gray 100 */
-    --dark: #0f172a; /* Slate 900 */
-    --muted: #64748b; /* Slate 500 */
+    --accent: #10b981; /* Emerald 500 (used for primary CTA) */
+    --bg-light: #f9fbfd; /* Very light, subtle background */
+    --bg-dark: #0f172a; /* Dark Slate */
+    --dark: #1e293b; /* Darker text */
+    --muted: #64748b;
     --card: #ffffff;
-    --border: #e5e7eb; /* Gray 200 */
-    --shadow-light: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-    --shadow-md: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    --border: #e5e7eb;
+    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
 }
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
+html {
+    scroll-behavior: smooth;
+}
 body {
     font-family: 'Inter', sans-serif;
-    background: var(--bg);
+    background: var(--bg-light);
     color: var(--dark);
     line-height: 1.6;
 }
 a { text-decoration: none; }
 
-/* 2. UTILITIES */
-.text-center { text-align: center; }
+/* 2. NAVIGATION BAR (Sticky) */
+.navbar {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: var(--card);
+    border-bottom: 1px solid var(--border);
+    box-shadow: var(--shadow-sm);
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.logo {
+    font-size: 1.5rem;
+    font-weight: 900;
+    color: var(--primary);
+}
+.nav-links a {
+    color: var(--dark);
+    font-weight: 500;
+    margin-left: 25px;
+    transition: color 0.3s ease;
+}
+.nav-links a:hover {
+    color: var(--primary);
+}
+.nav-cta {
+    padding: 8px 18px;
+    background: var(--primary);
+    color: #fff;
+    border-radius: 999px;
+    font-weight: 600;
+}
 
 /* 3. HERO SECTION */
 .hero {
-    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
     color: #fff;
     text-align: center;
-    padding: 90px 20px 110px;
+    padding: 120px 20px 140px;
     position: relative;
     overflow: hidden;
 }
-/* Adding a subtle background pattern or shape */
 .hero::before {
     content: '';
     position: absolute;
@@ -53,82 +91,90 @@ a { text-decoration: none; }
     left: 0;
     right: 0;
     bottom: 0;
-    background: radial-gradient(circle at top right, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at bottom left, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
-    opacity: 0.5;
+    background: radial-gradient(circle at top left, rgba(255, 255, 255, 0.1) 0%, transparent 40%);
+    opacity: 0.7;
 }
 .hero h1 {
-    font-size: clamp(2.5rem, 6vw, 4.2rem); /* Responsive font size */
+    font-size: clamp(3rem, 7vw, 5rem);
     font-weight: 900;
-    margin-bottom: 16px;
-    position: relative; /* To keep content above ::before */
+    margin-bottom: 20px;
+    position: relative;
+    /* Gradient Text Effect */
+    background: linear-gradient(90deg, #ffffff, #e0f2fe);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 .hero p {
-    max-width: 800px;
-    margin: 0 auto 40px;
-    font-size: clamp(1rem, 2vw, 1.25rem);
-    opacity: 0.9;
+    max-width: 850px;
+    margin: 0 auto 48px;
+    font-size: clamp(1.1rem, 2vw, 1.4rem);
+    opacity: 0.95;
+    font-weight: 400;
     position: relative;
 }
 .hero-buttons {
     display: flex;
     justify-content: center;
-    gap: 16px;
+    gap: 20px;
     flex-wrap: wrap;
     position: relative;
 }
 
 /* 4. BUTTONS */
 .btn {
-    padding: 16px 32px;
+    padding: 18px 36px;
     border-radius: 999px;
     font-weight: 700;
     text-decoration: none;
-    display: inline-block;
-    transition: all 0.3s ease;
-    box-shadow: var(--shadow-md);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    box-shadow: var(--shadow-lg);
 }
 .btn-primary {
-    background: var(--accent); /* Changed to Accent for better contrast against primary background */
-    color: #fff;
+    background: var(--accent);
+    color: var(--dark);
     border: none;
 }
 .btn-primary:hover {
-    background: #10b981; /* Darker green */
-    transform: translateY(-2px);
+    background: #059669; /* Darker green */
+    transform: translateY(-3px) scale(1.02);
 }
 .btn-secondary {
     background: rgba(255, 255, 255, .15);
     color: #fff;
     border: 1px solid rgba(255, 255, 255, .4);
-    box-shadow: none; /* Secondary button has less shadow */
+    box-shadow: var(--shadow-sm);
 }
 .btn-secondary:hover {
-    background: rgba(255, 255, 255, .25);
+    background: rgba(255, 255, 255, .3);
     border-color: #fff;
+    transform: translateY(-1px);
 }
 
 /* 5. SECTION & TITLES */
 section {
     max-width: 1200px;
     margin: auto;
-    padding: 80px 20px;
+    padding: 100px 20px;
+    position: relative;
 }
 .section-title {
     text-align: center;
-    margin-bottom: 60px;
+    margin-bottom: 70px;
 }
 .section-title h2 {
-    font-size: clamp(1.8rem, 4vw, 2.8rem);
-    font-weight: 800;
-    margin-bottom: 8px;
+    font-size: clamp(2.2rem, 4vw, 3.2rem);
+    font-weight: 900;
+    margin-bottom: 10px;
 }
 .section-title p {
     color: var(--muted);
-    font-size: 1.1rem;
+    font-size: 1.15rem;
 }
 
-/* 6. GRID LAYOUTS & CARDS */
+/* 6. GRID & CARDS (Features) */
 .grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -139,299 +185,343 @@ section {
     border-radius: 20px;
     padding: 30px;
     border: 1px solid var(--border);
-    box-shadow: var(--shadow-light);
-    transition: all 0.3s ease;
+    box-shadow: var(--shadow-md);
+    transition: all 0.4s ease-out;
 }
 .card:hover {
-    box-shadow: var(--shadow-md);
-    transform: translateY(-5px);
+    box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+    transform: translateY(-7px) rotateZ(0.5deg); /* Subtle 3D effect */
     border-color: var(--primary);
 }
 .card .icon {
     font-size: 2.5rem;
     color: var(--primary);
-    margin-bottom: 12px;
-    display: block;
+    margin-bottom: 15px;
+    display: inline-block;
 }
 .card h3 {
-    margin-bottom: 8px;
-    font-weight: 700;
+    margin-bottom: 10px;
+    font-weight: 800;
 }
 .card p {
     color: var(--muted);
 }
 
 /* 7. HOW IT WORKS (Timeline/Steps) */
-.how-it-works-step {
-    text-align: center;
-    padding: 10px;
-    position: relative;
-}
-.how-it-works-step .step-number {
+.step-number {
     display: inline-flex;
     justify-content: center;
     align-items: center;
-    width: 40px;
-    height: 40px;
+    width: 48px;
+    height: 48px;
     background: var(--secondary);
     color: #fff;
     border-radius: 50%;
-    font-weight: 700;
+    font-weight: 800;
     margin-bottom: 15px;
-    z-index: 10;
-    position: relative;
-}
-/* Arrow/Line separator for larger screens */
-@media (min-width: 768px) {
-    .how-it-works-grid {
-        position: relative;
-    }
-    .how-it-works-grid::before {
-        content: '';
-        position: absolute;
-        top: 60px; /* Adjust to align with step number */
-        left: 50%;
-        right: 50%;
-        transform: translateX(-50%);
-        width: 80%;
-        height: 2px;
-        background: var(--border);
-        z-index: 1;
-    }
-    .how-it-works-step {
-        padding-top: 50px; /* Space for the line */
-    }
-    /* Hide line for the last step */
-    .how-it-works-step:not(:last-child) .step-content::after {
-        content: '→'; /* Simple right arrow */
-        position: absolute;
-        right: -16px; /* Position between cards */
-        top: 50px;
-        color: var(--muted);
-        font-size: 1.5rem;
-        z-index: 2;
-    }
+    box-shadow: var(--shadow-md);
 }
 
-
-/* 8. ENQUIRY FORM */
-.form-card {
-    max-width: 650px;
-    margin: auto;
+/* 8. TESTIMONIALS */
+.testimonial-card {
+    max-width: 900px;
+    margin: 0 auto;
     background: var(--card);
     padding: 40px;
     border-radius: 24px;
-    border: 1px solid var(--border);
-    box-shadow: var(--shadow-md);
-}
-input, textarea {
-    width: 100%;
-    padding: 14px;
-    border-radius: 12px;
-    border: 1px solid var(--border);
-    margin-bottom: 20px;
-    font-family: 'Inter', sans-serif;
-    font-size: 1rem;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
-}
-input:focus, textarea:focus {
-    outline: none;
-    border-color: var(--primary);
-    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2); /* Focus ring */
-}
-textarea {
-    resize: vertical;
-    min-height: 120px;
-}
-.submit-btn {
-    width: 100%;
-    padding: 16px;
-    border-radius: 999px;
-    border: none;
-    background: var(--primary);
-    color: #fff;
-    font-weight: 700;
-    cursor: pointer;
-    transition: background 0.3s ease, transform 0.3s ease;
-}
-.submit-btn:hover {
-    background: #1d4ed8; /* Darker blue */
-    transform: translateY(-1px);
-}
-
-/* 9. TESTIMONIALS/CTA */
-.cta-banner {
-    background: var(--dark);
-    color: #fff;
-    padding: 60px 20px;
-    margin-top: 40px; /* Separate it visually */
-    border-radius: 24px;
+    border: 1px solid var(--primary);
+    box-shadow: var(--shadow-lg);
     text-align: center;
 }
-.cta-banner h2 {
-    font-size: 2.5rem;
-    margin-bottom: 20px;
+.quote-icon {
+    font-size: 3rem;
+    color: var(--primary);
+    opacity: 0.2;
+    margin-bottom: 15px;
 }
-.cta-banner p {
-    font-size: 1.1rem;
-    max-width: 700px;
-    margin: 0 auto 30px;
-    opacity: 0.9;
-}
-/* Button style within the CTA banner */
-.cta-banner .btn-primary {
-    background: var(--accent);
+.quote-text {
+    font-style: italic;
+    font-size: 1.4rem;
+    margin-bottom: 25px;
     color: var(--dark);
+}
+.author-info strong {
+    display: block;
+    font-weight: 700;
+}
+.author-info span {
+    color: var(--muted);
+    font-size: 0.95rem;
+}
+
+/* 9. PRICING */
+#pricing {
+    background: linear-gradient(to top, var(--bg-light), #ffffff);
+}
+.pricing-grid {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    text-align: center;
+}
+.pricing-card {
+    padding: 40px 25px;
+    border-radius: 20px;
+    border: 2px solid var(--border);
+    transition: all 0.3s ease;
+    background: var(--card);
+}
+.pricing-card.recommended {
+    border-color: var(--primary);
+    box-shadow: 0 20px 30px -5px rgba(37, 99, 235, 0.2);
+    transform: scale(1.05);
+}
+.pricing-card h4 {
+    font-size: 1.8rem;
+    font-weight: 800;
+    margin-bottom: 10px;
+}
+.price {
+    font-size: 3.5rem;
+    font-weight: 900;
+    color: var(--primary);
+    margin: 15px 0 25px;
+}
+.price small {
+    font-size: 1.2rem;
+    color: var(--muted);
+    font-weight: 500;
+}
+.feature-list {
+    list-style: none;
+    text-align: left;
+    margin-bottom: 30px;
+    padding: 0 20px;
+}
+.feature-list li {
+    margin-bottom: 10px;
+    font-weight: 500;
+    color: var(--dark);
+}
+.feature-list li i {
+    color: var(--accent);
+    margin-right: 10px;
 }
 
 /* 10. FOOTER */
 footer {
     text-align: center;
-    padding: 40px 20px;
-    background: #fff; /* White footer for contrast */
-    border-top: 1px solid var(--border);
+    padding: 50px 20px;
+    background: var(--bg-dark); /* Dark Footer */
+    color: #fff;
+    border-top: 5px solid var(--primary);
 }
 .footer-logo {
     font-weight: 900;
-    font-size: 1.5rem;
-    color: var(--primary);
-    margin-bottom: 15px;
-}
-.footer-links {
+    font-size: 1.8rem;
+    color: var(--accent);
     margin-bottom: 20px;
 }
 .footer-links a {
-    color: var(--muted);
-    text-decoration: none;
-    margin: 0 15px;
-    transition: color 0.3s ease;
+    color: #cbd5e1; /* Slate 300 */
 }
 .footer-links a:hover {
     color: var(--primary);
 }
 footer p {
-    color: var(--muted);
-    font-size: 0.9rem;
+    color: #94a3b8; /* Slate 400 */
+    margin-top: 20px;
 }
 
+@media (max-width: 768px) {
+    .navbar { padding: 15px 20px; }
+    .nav-links { display: none; }
+    .pricing-card.recommended {
+        transform: scale(1.0); /* Remove scale on mobile */
+    }
+}
 </style>
 </head>
 
 <body>
 
+<header class="navbar">
+    <div class="logo">ScreenerPro</div>
+    <nav class="nav-links">
+        <a href="#features">Features</a>
+        <a href="#how-it-works">How It Works</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#enquiry">Contact</a>
+        <a href="https://candidate-screeneerpro.streamlit.app" target="_blank" class="nav-cta">Log In</a>
+    </nav>
+</header>
+
 <div class="hero">
-    <h1>ScreenerPro</h1>
-    <p>The AI-powered candidate screening and hiring automation platform that elevates your HR team to the future of talent acquisition.</p>
+    <h1>Recruit Smarter, Not Harder.</h1>
+    <p>The **next-generation AI platform** automating candidate screening, assessment, and shortlisting for elite HR teams globally.</p>
 
     <div class="hero-buttons">
         <a href="https://candidate-screeneerpro.streamlit.app"
             target="_blank" class="btn btn-primary">
-            Start Your Free Trial →
+            <i class="fas fa-rocket"></i> Start Free Trial
         </a>
 
         <a href="#enquiry" class="btn btn-secondary">
-            Request a Demo
+            <i class="fas fa-calendar-alt"></i> Request a Demo
         </a>
     </div>
 </div>
 
-<section>
+<section id="features">
     <div class="section-title">
-        <h2 class="text-center">Elevate Your Hiring Process</h2>
-        <p>Everything you need to hire smarter, faster, and with unmatched precision.</p>
+        <h2>Unleash Precision Hiring</h2>
+        <p>Eliminate bias and tedious work while increasing candidate quality by up to 60%.</p>
     </div>
 
     <div class="grid">
         <div class="card">
-            <span class="icon">🧠</span>
-            <h3>AI Resume Screening</h3>
-            <p>Automatically rank candidates, extract intelligent insights, and identify top talent 10x faster than manual review.</p>
+            <i class="icon fas fa-brain"></i>
+            <h3>Intelligent Ranking</h3>
+            <p>Our custom LLM analyzes résumés against JD requirements, providing a ranked score and rationale instantly.</p>
         </div>
         <div class="card">
-            <span class="icon">✍️</span>
-            <h3>JD & Assessment Builder</h3>
-            <p>Create, edit, and optimize job descriptions and customized screening assessments using generative AI.</p>
+            <i class="icon fas fa-file-signature"></i>
+            <h3>Automated Workflows</h3>
+            <p>Set up rules to automatically send assessments, schedule interviews, and send rejection notices to candidates.</p>
         </div>
         <div class="card">
-            <span class="icon">📈</span>
-            <h3>Hiring Analytics</h3>
-            <p>Track candidate quality, time-to-hire, and overall recruitment performance with actionable data dashboards.</p>
+            <i class="icon fas fa-chart-line"></i>
+            <h3>Deep Metrics</h3>
+            <p>Get real-time analytics on candidate source performance, funnel drop-off, and hiring team efficiency.</p>
         </div>
         <div class="card">
-            <span class="icon">☁️</span>
-            <h3>Scalable & Secure</h3>
-            <p>Built on a robust, Firebase-backed infrastructure ensuring enterprise-grade authentication and data security.</p>
+            <i class="icon fas fa-shield-alt"></i>
+            <h3>Data Compliance</h3>
+            <p>GDPR and CCPA-compliant infrastructure ensures your hiring data is always secure and handled ethically.</p>
         </div>
     </div>
 </section>
 
-<section>
+<section id="how-it-works">
     <div class="section-title">
-        <h2 class="text-center">How ScreenerPro Works</h2>
-        <p>A simple, four-step journey to a streamlined hiring workflow.</p>
+        <h2>The 4-Step Automation Flow</h2>
+        <p>From job post to final shortlist, streamlined and optimized for speed.</p>
     </div>
 
-    <div class="grid how-it-works-grid">
-        <div class="how-it-works-step card">
+    <div class="grid">
+        <div class="card">
             <span class="step-number">1</span>
-            <h3>Post Job & Integrate</h3>
-            <p>Connect your existing ATS or use our portal to post your job description. Candidates apply as usual.</p>
+            <h3>Define & Post</h3>
+            <p>Input job requirements. Our AI refines the job description and generates custom assessment criteria.</p>
         </div>
-        <div class="how-it-works-step card">
+        <div class="card">
             <span class="step-number">2</span>
-            <h3>AI Screening</h3>
-            <p>ScreenerPro automatically parses all resumes, applies your job-specific criteria, and generates an AI compatibility score.</p>
+            <h3>Screening & Scoring</h3>
+            <p>Candidates submit résumés. AI instantly screens, extracts key skills, and calculates a match score (0-100%).</p>
         </div>
-        <div class="how-it-works-step card">
+        <div class="card">
             <span class="step-number">3</span>
-            <h3>Automated Invites</h3>
-            <p>Top-ranked candidates are automatically sent invitations to complete pre-screening questions or skill-based tests.</p>
+            <h3>Validate Skills</h3>
+            <p>Top candidates proceed to customizable video interviews or technical quizzes managed directly within the platform.</p>
         </div>
-        <div class="how-it-works-step card">
+        <div class="card">
             <span class="step-number">4</span>
-            <h3>Review & Interview</h3>
-            <p>Your HR team receives a ranked, validated shortlist. Move directly to interviews with the best-fit talent.</p>
+            <h3>Final Handoff</h3>
+            <p>Review the validated shortlist, complete with screening video transcripts and skill scores, ready for in-person interviews.</p>
         </div>
     </div>
 </section>
 
+<section id="testimonials">
+    <div class="section-title">
+        <h2>Trusted by Industry Leaders</h2>
+        <p>See what HR Directors are saying about ScreenerPro.</p>
+    </div>
+    
+    <div class="testimonial-card">
+        <div class="quote-icon">“</div>
+        <p class="quote-text">ScreenerPro transformed our hiring funnel. We reduced the time spent reviewing bad applications by 75%, allowing our recruiters to focus only on engaging the top 10%.</p>
+        <div class="author-info">
+            <strong>Sarah Chen</strong>
+            <span>VP of Talent Acquisition, TechInnovate Global</span>
+        </div>
+    </div>
+</section>
+
+
+<section id="pricing">
+    <div class="section-title">
+        <h2>Simple, Transparent Pricing</h2>
+        <p>Scalable plans that fit your team size and hiring velocity.</p>
+    </div>
+
+    <div class="grid pricing-grid">
+        <div class="pricing-card">
+            <h4>Startup</h4>
+            <div class="price">$99<small>/mo</small></div>
+            <p>Ideal for small teams with occasional hiring needs.</p>
+            <ul class="feature-list">
+                <li><i class="fas fa-check-circle"></i> 5 Active Job Postings</li>
+                <li><i class="fas fa-check-circle"></i> Basic AI Scoring</li>
+                <li><i class="fas fa-check-circle"></i> Standard Analytics Dashboard</li>
+                <li style="opacity: 0.5;"><i class="fas fa-minus-circle"></i> Dedicated Account Manager</li>
+            </ul>
+            <a href="#" class="btn btn-primary" style="padding: 12px 25px;">Get Started</a>
+        </div>
+
+        <div class="pricing-card recommended">
+            <h4>Enterprise Pro</h4>
+            <div class="price" style="color: var(--accent);">$499<small>/mo</small></div>
+            <p>Best for high-growth companies with multiple hiring streams.</p>
+            <ul class="feature-list">
+                <li><i class="fas fa-check-circle"></i> Unlimited Job Postings</li>
+                <li><i class="fas fa-check-circle"></i> Advanced Predictive AI</li>
+                <li><i class="fas fa-check-circle"></i> API & ATS Integration</li>
+                <li><i class="fas fa-check-circle"></i> Dedicated Account Manager</li>
+            </ul>
+            <a href="#" class="btn btn-primary" style="padding: 12px 25px;">Select Plan</a>
+        </div>
+
+        <div class="pricing-card">
+            <h4>Custom</h4>
+            <div class="price">Talk<small>/us</small></div>
+            <p>Tailored solutions for large corporations with complex requirements.</p>
+            <ul class="feature-list">
+                <li><i class="fas fa-check-circle"></i> Dedicated Private Cloud</li>
+                <li><i class="fas fa-check-circle"></i> Custom LLM Training</li>
+                <li><i class="fas fa-check-circle"></i> On-site Implementation</li>
+                <li><i class="fas fa-check-circle"></i> 24/7 Priority Support</li>
+            </ul>
+            <a href="#enquiry" class="btn btn-primary" style="padding: 12px 25px; background: var(--secondary);">Contact Sales</a>
+        </div>
+    </div>
+</section>
 
 <section id="enquiry">
     <div class="section-title">
-        <h2 class="text-center">Get Started Today</h2>
-        <p>Schedule a personalized demo or drop us a line with your questions.</p>
+        <h2 style="color: var(--primary);">Let's Connect</h2>
+        <p>Schedule a personalized demo or get answers to your specific enterprise needs.</p>
     </div>
 
     <div class="form-card">
         <form action="#" method="post">
-            <input type="text" name="name" placeholder="Your Name" required>
+            <input type="text" name="name" placeholder="Your Full Name" required>
             <input type="email" name="email" placeholder="Work Email" required>
             <input type="text" name="company" placeholder="Company Name" required>
-            <textarea name="message" placeholder="What are your main hiring challenges?"></textarea>
-            <button class="submit-btn" type="submit">Send Demo Request</button>
+            <textarea name="message" placeholder="Tell us about your team size and hiring volume (optional)"></textarea>
+            <button class="submit-btn" type="submit">Schedule My Demo</button>
         </form>
-    </div>
-</section>
-
-<section>
-    <div class="cta-banner">
-        <h2>Ready to Hire Smarter?</h2>
-        <p>Join the hundreds of modern companies that trust ScreenerPro to revolutionize their talent pipeline and reduce time-to-hire by over 40%.</p>
-        <a href="https://candidate-screeneerpro.streamlit.app" target="_blank" class="btn btn-primary">
-            Start Your Free Trial →
-        </a>
     </div>
 </section>
 
 <footer>
     <div class="footer-logo">ScreenerPro</div>
     <div class="footer-links">
-        <a href="#">Privacy Policy</a>
-        <a href="#">Terms of Service</a>
+        <a href="#features">Product</a>
+        <a href="#pricing">Plans</a>
+        <a href="#">Security</a>
         <a href="proposal.pdf" download>Download Proposal</a>
-        <a href="https://www.linkedin.com" target="_blank">LinkedIn</a>
+        <a href="https://www.linkedin.com" target="_blank">Careers</a>
     </div>
-    <p>© 2025 ScreenerPro • AI-Powered Talent Acquisition</p>
+    <p>© 2025 ScreenerPro Technologies Inc. • Built for modern hiring.</p>
 </footer>
 
 </body>
